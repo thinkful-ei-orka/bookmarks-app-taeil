@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmarks App</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <main>
+    <h1>Bookmarks</h1>
+    <div class="bookmarkButtons mb15">
+      <button class="primary">Add Bookmark</button>
+      <select>
+        <option>Minimum Rating</option>
+        <option>5 Star</option>
+        <option>4+ Star</option>
+        <option>3+ Star</option>
+        <option>2+ Star</option>
+        <option>1+ Star</option>
+      </select>
+    </div>
+    <div class="bookmarks">
+      <div class="bookmark">
+        <div class="titleAndRating">
+          <h2>Bookmark Title</h2>
+          <div class="rating"></div>
+        </div>
+        <div class="description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <a href="#" class="btn primary">Visit Site</a>
+          <button class="red">Remove</button>
+        </div>
+      </div>
+      <div class="bookmark">
+        <div class="titleAndRating">
+          <h2>Bookmark Title</h2>
+          <div class="rating"></div>
+        </div>
+        <div class="description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <a href="#" class="btn primary">Visit Site</a>
+          <button class="red">Remove</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div>
+    <h1>Add Bookmark</h1>
+    <form>
+      <fieldset>
+        <label>Title</label>
+        <input type="text">
+        <label>URL Link</label>
+        <input type="text" class="error">
+        <label>Description</label>
+        <textarea></textarea>
+        <label>Rating</label>
+        <input type="text">
+        <div class="ratingSelect"></div>
+        <div class="formButtons">
+          <button class="gray">Cancel</button>
+          <input type="submit" value="Create" class="primary">
+        </div>
+      </fieldset>
+    </form>
+    <div class="errorMessage">The Title and URL Link are required.</div>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <script src="./index.js" type="module"></script>
+</body>
+</html>

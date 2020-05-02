@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+body {
+  margin: 0;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Helpers */
+.mb15 {
+  margin-bottom: 15px;
+}
+.mb7 {
+  margin-bottom: 7
+}
+
+/* Document */
+main {
+  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+footer {
+  text-align: center;
+  color: #888;
+  padding: 15px 0;
+  font-size: 12px;
+  border-top: 1px solid #a9a9a9;
+}
+footer a {
+  color: #888;
+}
+
+/* Typography */
+h2 {
+  font-size: 20px;
+}
+/* Placeholder. Default fonts look fine. */
+
+/* Elements */
+button, input[type="submit"], .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  line-height: 1em;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 7px;
+  border: 0;
+}
+.primary {
+  background: #2185d0;
+}
+.red {
+  background: #db2828;
+}
+.gray {
+  background: #a9a9a9;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  padding: 9px 19px;
+  line-height: 1em;
+  font-size: 1em;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid #b3b3b3;
+  cursor: pointer;
+}
+
+/* Button icons */
+.addBookmark, select, .visitSite, .remove, input.create {
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  padding-left: 36px;
+}
+.addBookmark {
+  background-image: url('./img/icons8-add-50.png');
+}
+select {
+  background-image: url('./img/icons8-sort-down-50.png');
+  background-position: right 10px center;
+  padding-left: 19px;
+  padding-right: 36px;
+}
+.visitSite {
+  background-image: url('./img/icons8-external-link-50.png');
+}
+.remove {
+  background-image: url('./img/icons8-remove-50.png');
+}
+.create {
+  background-image: url('./img/icons8-create-50.png');
+}
+
+/* Stars */
+.rating {
+
+}
+.star {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('./img/icons8-star-50.png');
+  background-size: 100%;
+}
+.rating.one .star1, .rating.two .star1, .rating.three .star1, .rating.four .star1, .rating.five .star1 {
+  background-image: url('./img/icons8-star-filled-50.png');
+}
+.rating.two .star2, .rating.three .star2, .rating.four .star2, .rating.five .star2 {
+  background-image: url('./img/icons8-star-filled-50.png');
+}
+.rating.three .star3, .rating.four .star3, .rating.five .star3 {
+  background-image: url('./img/icons8-star-filled-50.png');
+}
+.rating.four .star4, .rating.five .star4 {
+  background-image: url('./img/icons8-star-filled-50.png');
+}
+.rating.five .star5 {
+  background-image: url('./img/icons8-star-filled-50.png');
+}
+
+/* Form */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+label {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 7px;
+}
+input[type="text"], textarea {
+  width: 100%;
+  max-width: 400px;
+  font-size: 1em;
+  padding: 7px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+textarea {
+  height: 100px;
+}
+.error {
+  border: 2px solid #db2828 !important;
+}
+.formButtons {
+  margin: 15px 0;
+}
+.errorMessage {
+  border: 1px solid #db2828;
+  padding: 10px;
+  background: #ffe8e6;
+  color: #db2828;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  padding-left: 36px;
+  background-image: url('./img/icons8-cancel-50.png');
+}
+form .rating .star {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* Components */
+.bookmarks {
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #b3b3b3;
+}
+.bookmark {
+  border-bottom: 1px solid #b3b3b3;
+  margin-top: -1px;
+}
+.bookmark:last-of-type {
+  border-bottom: 0;
+}
+.bookmark h2 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.titleAndRating {
+  border-bottom: 1px solid #b3b3b3;
+  padding: 20px;
+  cursor: pointer;
+  /*
+  background-image: url('./img/icons8-expand-arrow-50.png');
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 30px;
+  */
+  padding-right: 60px;
+  position: relative;
+}
+.titleAndRating .expand-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 30px;
+  margin-top: -15px;
+}
+.description {
+  padding: 20px;
+}
+.description p {
+  margin-top: 0;
+}
