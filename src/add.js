@@ -63,8 +63,6 @@ const handleFormSubmit = function() {
   let description = $('#description').val();
   let rating = parseInt($('#rating').val());
 
-
-
   if (title === '' || url === '') {
     displayErrors(title, url);
   } else {
@@ -80,6 +78,8 @@ const handleFormSubmit = function() {
         if (data.message) {
           $('.errorMessage').html(data.message);
           $('.errorMessage').show();
+        } else {
+          index.renderBookmarks();
         }
       });
   }

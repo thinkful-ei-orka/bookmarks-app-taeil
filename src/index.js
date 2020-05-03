@@ -7,16 +7,10 @@ import add from './add.js';
 - Pull from the API
 - Update the store
 
-
-
 - Render the bookmarks page
 - Render the add page
 
 - Filter bookmarks page
-
-
-
-
 
 Bookmarks
 -
@@ -24,7 +18,6 @@ Bookmarks
 
 const renderBookmarks = function() {
   let html = '';
-
   let htmlHeader = `
     <h1>Bookmarks</h2>
     <div class="bookmarkButtons mb15">
@@ -39,33 +32,41 @@ const renderBookmarks = function() {
       </select>
     </div>
   `;
-  let bookmarksHtml = `
-    <div class="bookmarks">
-      <div class="bookmark">
-        <div class="titleAndRating">
-          <h2>Bookmark Title</h2>
-          <div class="rating">
-            <span class="star star1"></span>
-            <span class="star star2"></span>
-            <span class="star star3"></span>
-            <span class="star star4"></span>
-            <span class="star star5"></span>
+
+  api.getBookmarks()
+    .then(data => {
+      console.log(data);
+
+      let bookmarksHtml = '<div class="bookmarks">';
+      data.forEach(function(bookmarkData) {
+        bookmarksHtml += `
+        <div class="bookmark" data-id="${bookmarkData.id}">
+          <div class="titleAndRating">
+            <h2>${bookmarkData.title}</h2>
+            <div class="rating rating-${bookmarkData.rating}">
+              <span class="star star1"></span>
+              <span class="star star2"></span>
+              <span class="star star3"></span>
+              <span class="star star4"></span>
+              <span class="star star5"></span>
+            </div>
+            <img class="expand-icon" src="./img/icons8-expand-arrow-50.png">
           </div>
-          <img class="expand-icon" src="./img/icons8-expand-arrow-50.png">
+          <div class="description">
+            <p>${bookmarkData.description}</p>
+            <a href="${bookmarkData.url}" class="btn primary visitSite mr5">Visit Site</a>
+            <button class="red remove">Remove</button>
+          </div>
         </div>
-        <div class="description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a href="#" class="btn primary visitSite mr5">Visit Site</a>
-          <button class="red remove">Remove</button>
-        </div>
-      </div>
-    </div>
-  `;
+        `;
+      });
 
-  html += htmlHeader + bookmarksHtml;
+      bookmarksHtml += '</div>';
+      html += htmlHeader + bookmarksHtml;
 
-  $('main').html(html);
-  handleEvents();
+      $('main').html(html);
+      handleEvents();
+    });
 };
 
 const handleEvents = function() {
