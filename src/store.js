@@ -1,5 +1,3 @@
-import api from './api.js';
-
 const store = {
   bookmarks: [],
   adding: false,
@@ -7,20 +5,20 @@ const store = {
   filter: 0
 };
 
-const addBookmarks = function() {
-
+const addBookmarks = function(bookmarks) {
+  /* Ignore. Bookmarks are added to store.bookmarks on page load. */
 };
 
-const addBookmark = function() {
-
+const addBookmark = function(bookmark) {
+  store.bookmarks.push(bookmark);
 };
 
 const updateBookmark = function() {
-
+  /* Optional */
 };
 
-const deleteBookmark = function() {
-
+const deleteBookmark = function(id) {
+  store.bookmarks = store.bookmarks.filter(bookmark => bookmark.id !== id);
 };
 
 export default {
@@ -29,5 +27,4 @@ export default {
   addBookmark,
   updateBookmark,
   deleteBookmark
-
 };

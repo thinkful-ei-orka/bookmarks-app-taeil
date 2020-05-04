@@ -3,18 +3,20 @@ import store from './store.js';
 import index from './index.js';
 
 const renderAdd = function() {
+  store.adding = true;
+
   let html = `
     <h1>Add Bookmark</h1>
-    <form>
+    <form id="addForm">
       <fieldset>
         <label for="title">Title</label>
-        <input type="text" id="title">
+        <input type="text" id="title" name="title">
         <label for="url">URL Link</label>
-        <input type="text" id="url">
-        <label for="description">Description <small>(optional)</small></label>
-        <textarea id="description"></textarea>
+        <input type="text" id="url" name="url">
+        <label for="desc">Description <small>(optional)</small></label>
+        <textarea id="desc" name="desc"></textarea>
         <label for="rating">Rating <small>(optional)</small></label>
-        <input type="text" id="rating">
+        <input type="text" id="rating" name="rating">
         <div class="rating ratingSelect">
           <span class="star star1" data-value="1"></span>
           <span class="star star2" data-value="2"></span>
@@ -24,7 +26,7 @@ const renderAdd = function() {
         </div>
         <div class="formButtons">
           <input type="submit" value="Create" class="primary create mr5">
-          <button class="gray cancel">Cancel</button>
+          <button type="button" class="gray cancel">Cancel</button>
         </div>
       </fieldset>
     </form>
@@ -53,52 +55,53 @@ const handleEvents = function() {
   $('.cancel').click(function() {
     index.renderBookmarks();
   });
-
-
 };
 
 const handleFormSubmit = function() {
-  let title = $('#title').val();
-  let url = $('#url').val();
-  let description = $('#description').val();
-  let rating = parseInt($('#rating').val());
+  let form = document.getElementById('addForm');
+  const formData = new FormData(form);
+  const formObject = {};
+  formData.forEach((val, name) => formObject[name] = val);
 
-  if (title === '' || url === '') {
-    displayErrors(title, url);
+  if (formObject.title === '' || formObject.url === '') {
+    displayErrors(formObject.title, formObject.url);
   } else {
-    let bookmark = {
-      title: title,
-      url: url,
-      description: description,
-      rating: rating
-    };
-    console.log(bookmark);
-    api.postBookmark(bookmark)
+    formObject.url = normalizeUrl(formObject.url);
+    formObject.rating = parseInt(formObject.rating);
+
+    api.postBookmark(formObject)
       .then(data => {
         if (data.message) {
+          store.error = data.message;
           $('.errorMessage').html(data.message);
           $('.errorMessage').show();
         } else {
+          store.addBookmark(data);
           index.renderBookmarks();
         }
       });
   }
 };
 
+const normalizeUrl = function(url) {
+  if (url.indexOf('http://') === -1 || url.indexOf('https://') === -1){
+    return 'https://' + url;
+  }
+};
+
 const displayErrors = function(title, url) {
-  let errorMessage = '';
   if (title === '' && url === '') {
-    errorMessage = 'The Title and URL Link are required.';
+    store.error = 'The Title and URL Link are required.';
     $('#title').addClass('error');
     $('#url').addClass('error');
   } else if (title === '') {
-    errorMessage = 'The Title is required.';
+    store.error = 'The Title is required.';
     $('#title').addClass('error');
   } else {
-    errorMessage = 'The URL Link is required.';
+    store.error = 'The URL Link is required.';
     $('#url').addClass('error');
   }
-  $('.errorMessage').html(errorMessage);
+  $('.errorMessage').html(store.error);
   $('.errorMessage').show();
 };
 

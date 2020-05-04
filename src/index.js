@@ -2,21 +2,13 @@ import api from './api.js';
 import store from './store.js';
 import add from './add.js';
 
-/* What functionality is this site going to have?
+$(function() {
 
-- Pull from the API
-- Update the store
-
-- Render the bookmarks page
-- Render the add page
-
-- Filter bookmarks page
-
-Bookmarks
--
-*/
+});
 
 const renderBookmarks = function() {
+  store.adding = false;
+
   let html = '';
   let htmlHeader = `
     <h1>Bookmarks</h2>
@@ -35,12 +27,18 @@ const renderBookmarks = function() {
 
   api.getBookmarks()
     .then(data => {
-      console.log(data);
+      store.store.bookmarks = data;
 
       let bookmarksHtml = '<div class="bookmarks">';
       data.forEach(function(bookmarkData) {
+        let descriptionHtml = '';
+
+        if (bookmarkData.desc !== null) {
+          descriptionHtml = `<p>${bookmarkData.desc}</p>`;
+        }
+
         bookmarksHtml += `
-        <div class="bookmark" data-id="${bookmarkData.id}">
+        <div class="bookmark rating-${bookmarkData.rating}" data-id="${bookmarkData.id}">
           <div class="titleAndRating">
             <h2>${bookmarkData.title}</h2>
             <div class="rating rating-${bookmarkData.rating}">
@@ -53,8 +51,8 @@ const renderBookmarks = function() {
             <img class="expand-icon" src="./img/icons8-expand-arrow-50.png">
           </div>
           <div class="description">
-            <p>${bookmarkData.description}</p>
-            <a href="${bookmarkData.url}" class="btn primary visitSite mr5">Visit Site</a>
+            ${descriptionHtml}
+            <a href="${bookmarkData.url}" target="_blank" class="btn primary visitSite mr5">Visit Site</a>
             <button class="red remove">Remove</button>
           </div>
         </div>
@@ -62,7 +60,8 @@ const renderBookmarks = function() {
       });
 
       bookmarksHtml += '</div>';
-      html += htmlHeader + bookmarksHtml;
+      let errorMessage = '<div class="errorMessage"></div>';
+      html += htmlHeader + bookmarksHtml + errorMessage;
 
       $('main').html(html);
       handleEvents();
@@ -74,17 +73,37 @@ const handleEvents = function() {
     add.renderAdd();
   });
 
-  $('.titleAndRating').click(function() {
+  $('select').on('change', function() {
+    $('.bookmarks').removeClass('min-0 min-1 min-2 min-3 min-4 min-5');
+    store.filter = $(this).val();
+    $('.bookmarks').addClass('min-' + store.filter);
+  });
 
+  $('.titleAndRating').click(function() {
+    $(this).toggleClass('expand');
+    $(this).siblings('.description').slideToggle();
+  });
+
+  $('.remove').click(function() {
+    let id = $(this).parents('.bookmark').attr('data-id');
+    api.deleteBookmark(id)
+      .then(data => {
+        store.deleteBookmark(id);
+        renderBookmarks();
+      });
   });
 };
 
-
+const displayError = function(error) {
+  $('.errorMessage').html(error);
+  $('.errorMessage').show();
+};
 
 $(function() {
   renderBookmarks();
 });
 
 export default {
-  renderBookmarks
+  renderBookmarks,
+  displayError
 };

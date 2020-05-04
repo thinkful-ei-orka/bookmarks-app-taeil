@@ -1,17 +1,29 @@
+import store from './store.js';
+
 const baseUrl = 'https://thinkful-list-api.herokuapp.com/taeil/';
-// const itemsUrl = baseUrl + 'items/';
 const bookmarksUrl = baseUrl + 'bookmarks/';
 // https://thinkful-list-api.herokuapp.com/endpoints/bookmarks
 
-const callApi = function(args = {}) {
-  return fetch(bookmarksUrl, args)
+const callApi = function(url = bookmarksUrl, args = {}) {
+  return fetch(url, args)
     .then(res => {
       console.log(res);
-      return res.json();
+      if (res.ok) {
+        return res.json();
+      } else {
+        let errorMessage = `${res.status}: ${res.statusText}`;
+        store.error = errorMessage;
+        alert(errorMessage);
+        // The DOM hasn't loaded at this point.
+      }
     })
     .then(data => {
-      console.log(data);
+      console.log('data returned', data);
       return data;
+    })
+    .catch(e => {
+      store.error = e;
+      $('.errorMessage').html(e);
     });
 };
 
@@ -28,12 +40,12 @@ const postBookmark = function(bookmark) {
     body: JSON.stringify(bookmark),
   };
 
-  return callApi(args);
+  return callApi(bookmarksUrl, args);
 };
 
 const updateBookmark = function(id) {
   let data = {
-
+    id: id
   };
 
   let args = {
@@ -44,11 +56,14 @@ const updateBookmark = function(id) {
     body: JSON.stringify(data),
   };
 
-  return callApi(args);
+  return callApi(bookmarksUrl, args);
 };
 
 const deleteBookmark = function(id) {
-
+  let url = bookmarksUrl + id;
+  let data = {
+    id: id
+  };
 
   let args = {
     method: 'DELETE',
@@ -58,11 +73,8 @@ const deleteBookmark = function(id) {
     body: JSON.stringify(data),
   };
 
-  return callApi(args);
+  return callApi(url, args);
 };
-
-
-
 
 export default {
   getBookmarks,
