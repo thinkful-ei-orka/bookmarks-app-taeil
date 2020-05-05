@@ -41,6 +41,9 @@ footer a {
 }
 
 /* Typography */
+h1 {
+  text-align: center;
+}
 h2 {
   font-size: 20px;
 }
@@ -208,6 +211,13 @@ form .rating .star {
 }
 
 /* Components */
+.bookmarkButtons {
+  text-align: center;
+}
+.bookmarkButtons button {
+  margin-right: 0;
+  margin-bottom: 10px;
+}
 .bookmarks {
   border-radius: 5px;
   overflow: hidden;
@@ -287,4 +297,18 @@ form .rating .star {
 }
 .min-5 .bookmark.rating-null, .min-5 .bookmark.rating-1, .min-5 .bookmark.rating-2, .min-5 .bookmark.rating-3, .min-5 .bookmark.rating-4 {
   display: none;
+}
+
+/* Media Queries */
+@media (min-width: 480px) {
+  h1 {
+    text-align: left;
+  }
+  .bookmarkButtons {
+    text-align: left;
+  }
+  .bookmarkButtons button {
+    margin-right: 5px;
+    margin-bottom: 0;
+  }
 }

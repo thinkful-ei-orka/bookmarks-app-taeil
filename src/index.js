@@ -13,7 +13,7 @@ const renderBookmarks = function() {
   let htmlHeader = `
     <h1>Bookmarks</h2>
     <div class="bookmarkButtons mb15">
-      <button class="primary addBookmark mr5">Add Bookmark</button>
+      <button class="primary addBookmark">Add Bookmark</button>
       <select>
         <option value="0">Minimum Rating</option>
         <option value="5">5 Star</option>
