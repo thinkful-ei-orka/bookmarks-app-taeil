@@ -48,7 +48,7 @@ const renderBookmarks = function() {
               <span class="star star4"></span>
               <span class="star star5"></span>
             </div>
-            <img class="expand-icon" src="./img/icons8-expand-arrow-50.png">
+            <img class="expand-icon" src="./img/icons8-expand-arrow-50.png" alt="expand icon">
           </div>
           <div class="description">
             ${descriptionHtml}
