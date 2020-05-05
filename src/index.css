@@ -240,14 +240,10 @@ form .rating .star {
 .titleAndRating {
   padding: 20px;
   cursor: pointer;
-  /*
-  background-image: url('./img/icons8-expand-arrow-50.png');
-  background-repeat: no-repeat;
-  background-position: right 20px center;
-  background-size: 30px;
-  */
   padding-right: 60px;
   position: relative;
+  width: 100%;
+  text-align: left;
 }
 .titleAndRating:hover, .titleAndRating.expand {
   background-color: rgb(245, 245, 245);

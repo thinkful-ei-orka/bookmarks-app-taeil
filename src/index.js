@@ -39,7 +39,7 @@ const renderBookmarks = function() {
 
         bookmarksHtml += `
         <div class="bookmark rating-${bookmarkData.rating}" data-id="${bookmarkData.id}">
-          <div class="titleAndRating">
+          <button class="titleAndRating">
             <h2>${bookmarkData.title}</h2>
             <div class="rating rating-${bookmarkData.rating}">
               <span class="star star1"></span>
@@ -49,7 +49,7 @@ const renderBookmarks = function() {
               <span class="star star5"></span>
             </div>
             <img class="expand-icon" src="./img/icons8-expand-arrow-50.png" alt="expand icon">
-          </div>
+          </button>
           <div class="description">
             ${descriptionHtml}
             <a href="${bookmarkData.url}" target="_blank" class="btn primary visitSite mr5">Visit Site</a>
